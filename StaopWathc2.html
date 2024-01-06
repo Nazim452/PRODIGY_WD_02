@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StopWatch</title>
+
+    <style>
+        * {
+             margin:0;
+             padding:0;
+             box-sizing:border-box;
+             font-family:'arial';
+          }
+          .container{
+            /* display: grid;
+            place-items: center; */
+            width: 40%;
+            min-width: 500px;
+            position: absolute;
+            top: 30%;
+            left: 30%;
+            /* transform: translateX(-50% , -50%); */
+            background: #23373b;
+            padding-bottom: 60px;
+            border-radius: 10px;
+            box-shadow: 5px 5px 5px gray;
+            color: white;
+
+          }
+          .timer-display{
+            width: 100%;
+            background-color: gray;
+            padding: 40px 0;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 4rem;
+            border-radius: 10px 10px;
+
+          }
+
+          .laps{
+            text-align: center;
+            margin-top: 10px;
+            text-decoration: none;
+          }
+          .action{
+            width: 85%;
+            margin: 60px auto 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            grid-gap: 30px;
+
+
+          }
+          .action button{
+            padding: 10px 20px;
+            border: none;
+            font-family: 'Roboto';
+
+            font-size: 18px;
+            /* font-weight: 500; */
+            font-weight: 300;
+            border-radius: 5px;
+            cursor: pointer;
+
+
+
+          }
+          button:hover{
+            background-color: black;
+            color: white;
+            padding: 7px 17px;
+            transition: all 0.5s ease-in-out;;
+          }
+         
+      
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="timer-display">
+            00 : 00 : 00 : 00
+
+        </div>
+        <ul class="laps"></ul>
+
+        <div class="action">
+            <button id="startTimer" onclick="start()">Start</button>
+            <button id="pauseTimer" onclick="pause()">Pause</button>
+            <button id="resetTimer" onclick="reset()">Reset</button>
+            <button id="restartTimer" onclick="restart()">Restart</button>
+            <button id="lap" onclick="lap()">Lap</button>
+            <button id="resetLap" onclick="resetLap()">Reset Lap</button>
+        </div>
+    </div>
+
+    <script>
+        var ms=0,s=0,m=0,h=0;
+        var timer;
+
+        var display = document.querySelector('.timer-display');
+        var laps = document.querySelector('.laps');
+
+        function start(){
+            if(!timer){
+                timer =setInterval(run,10)
+            }
+        }
+        function run(){
+            ms++;
+            display.innerHTML = getTimer();
+            if(ms==100){
+                ms=0
+                s++;
+            }
+            if(s==60){
+                s=0;
+                m++;
+            }
+            if(m==60){
+                m=0;
+                h++;
+            }
+
+
+        }
+
+        function getTimer(){
+            return (h<10?"0"+h:h)+" : " +(m<10? "0"+m :m)+" : " +(s<10?"0"+s:s)+" : " +(ms<10?"0"+ms:ms)
+        }
+
+
+    </script>
+    
+</body>
+</html>
