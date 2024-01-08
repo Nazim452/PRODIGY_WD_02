@@ -83,7 +83,7 @@
 
     <div class="container">
         <div class="timer-display">
-            00 : 00 : 00 : 00
+            00:00:00:00
 
         </div>
         <ul class="laps"></ul>
@@ -100,7 +100,7 @@
 
     <script>
         var ms=0,s=0,m=0,h=0;
-        var timer;
+        var timer = false;
 
         var display = document.querySelector('.timer-display');
         var laps = document.querySelector('.laps');
@@ -130,7 +130,45 @@
         }
 
         function getTimer(){
-            return (h<10?"0"+h:h)+" : " +(m<10? "0"+m :m)+" : " +(s<10?"0"+s:s)+" : " +(ms<10?"0"+ms:ms)
+            return (h<10?"0"+h:h)+":" +(m<10?"0"+m:m)+":" +(s<10?"0"+s:s)+":" +(ms<10?"0"+ms:ms)
+        }
+
+        function pause(){
+            stopTimer();
+        }
+        function stopTimer(){
+            clearInterval(timer);
+            timer=false;
+        }
+
+
+        function reset(){
+            stopTimer();
+            ms=0;
+            s=0;
+            m=0;
+            h=0
+            display.innerHTML = getTimer();
+
+        }
+
+        function restart(){
+            if(timer){
+                reset();
+                start();
+            }
+        }
+
+        function lap(){
+            if(timer){
+                var li = document.createElement("li");
+                li.innerHTML =getTimer();
+                laps.appendChild(li);
+            }
+        }
+
+        function resetLap(){
+            laps.innerHTML = "";
         }
 
 
